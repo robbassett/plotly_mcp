@@ -8,6 +8,7 @@ from fastapi.responses import FileResponse
 
 from config import config
 from plotly_mcp import plotly_mcp
+from api.routes.mcp_routes import router as mcp_router
 
 # Configure logging
 logging.basicConfig(
@@ -19,8 +20,6 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger(__name__)
-
-# Import routers
 
 # Load MCP here to allow the lifespan to be included in the FastAPI application
 mcp_app = plotly_mcp.http_app(path="/mcp")
@@ -36,7 +35,7 @@ app = FastAPI(
 )
 
 # Include routers
-#app.include_router(placeholder)
+app.include_router(mcp_router)
 
 # Add MCP server
 app.mount("/", mcp_app)

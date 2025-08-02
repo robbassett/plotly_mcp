@@ -1,6 +1,10 @@
 from typing import List, Dict, Any, Literal, Optional
 from pydantic import BaseModel, Field
 
+class OpenAiMessage(BaseModel):
+    role: str
+    content: str
+
 class LineChartInput(BaseModel):
     x:List[List[float|int]] = Field(description="A nested list containing each set of x-values to include in the chart")
     y:List[List[float|int]] = Field(description="A nested list containing each set of y-values to include in the chart")

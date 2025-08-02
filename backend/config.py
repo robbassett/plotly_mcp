@@ -13,13 +13,14 @@ class LlmConfig(BaseSettings):
     """Configuration for LLM"""
     BASE_URL: str = os.environ.get("OPENAI_API_KEY","")
     TOKEN: str = os.environ.get("OPENAI_API_TOKEN","")
+    MODEL: str = os.environ.get("OPENAI_MODEL","")
 
     @property
     def connection_params(self) -> Dict[str,str]:
         """Return the LLM connection params"""
         return {
             "base_url":self.BASE_URL,
-            "api_token":self.TOKEN
+            "api_key":self.TOKEN
         }
     
 class APIConfig(BaseSettings):
