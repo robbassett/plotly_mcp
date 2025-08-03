@@ -46,7 +46,7 @@ def line_plot(props:LineChartInput) -> str:
             x=_x,
             y=_y,
             customdata=_custom,
-            label=_label
+            name=_label
         ))
 
     figure.update_layout(

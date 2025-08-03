@@ -23,6 +23,7 @@ class ChartBot:
     def __init__(self):
         transport = FastMCPTransport(plotly_mcp)
         self.mcp = Client(transport=transport)
+        print(config.llm.connection_params)
         self.llm = OpenAI(**config.llm.connection_params)
         self.model = config.llm.MODEL 
 
@@ -71,6 +72,7 @@ class ChartBot:
                 }
                 for tool in response
             ]
+
         except Exception as e:
             return f"Error connecting to MCP server: {str(e)}"
 
@@ -85,7 +87,7 @@ class ChartBot:
 
         output = [*message_stream]
         current_message = response.choices[0].message
-        
+
         # Continue processing while there are tool calls
         if current_message.tool_calls:
             if current_message.content:
@@ -120,7 +122,7 @@ class ChartBot:
 
                 try:
                     # Execute tool call
-                    async with self.session as session:
+                    async with self.mcp as session:
                         result = await session.call_tool(tool_name, tool_args)
                     output.append({
                         "role":"chart",

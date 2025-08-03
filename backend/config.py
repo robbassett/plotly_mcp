@@ -11,9 +11,9 @@ dotenv.load_dotenv()
 
 class LlmConfig(BaseSettings):
     """Configuration for LLM"""
-    BASE_URL: str = os.environ.get("OPENAI_API_KEY","")
+    BASE_URL: str = os.environ.get("OPENAI_API_KEY","https://openrouter.ai/api/v1")
     TOKEN: str = os.environ.get("OPENAI_API_TOKEN","")
-    MODEL: str = os.environ.get("OPENAI_MODEL","")
+    MODEL: str = os.environ.get("OPENAI_MODEL","anthropic/claude-sonnet-4")
 
     @property
     def connection_params(self) -> Dict[str,str]:
