@@ -147,12 +147,13 @@ plotly_mcp/
 - Python 3.8+
 - Node.js 16+
 - npm or yarn
+- uvicorn
 
 ### Backend Setup
 ```bash
 cd backend
 pip install -r requirements.txt
-python main.py
+uvicorn main:app
 ```
 
 ### Frontend Setup (Development)
