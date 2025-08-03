@@ -189,15 +189,6 @@ curl -X POST "http://localhost:8000/chat/query" \
 
 The AI will process this request, use the MCP tools to generate a Plotly chart, and return the interactive visualization.
 
-## 🤝 Contributing
-
-This is a demonstration project, but contributions that enhance the example or add educational value are welcome. Focus areas include:
-
-- Additional chart types and MCP tools
-- Better integration patterns
-- Documentation improvements
-- Example datasets and use cases
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
