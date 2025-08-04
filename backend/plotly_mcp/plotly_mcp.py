@@ -8,6 +8,8 @@ from .input_schema import LineChartInput
 
 plotly_mcp = FastMCP(name="Plotly MCP")
 
+DEFAULT_LAYOUT = {}
+
 @plotly_mcp.tool
 def line_plot(props:LineChartInput) -> str:
     """
@@ -33,26 +35,38 @@ def line_plot(props:LineChartInput) -> str:
     """
     figure = go.Figure()
     x,y = props.x,props.y
+    print(props)
+    print()
 
-    custom = props.custom_data
+    custom = props.hover_values
     label = props.labels
     axes_labels = props.axes_labels or {}
+    hovertemplate = ""
+    for i,hlabel in enumerate(props.hover_labels):
+        hovertemplate += str(hlabel) + ": %{customdata[" + str(i) + "]}<br>"
+    hovertemplate += '<extra></extra>'
+
+    print(hovertemplate)
 
     for data_index,(_x,_y) in enumerate(zip(x,y)):
         _custom = custom[data_index] if custom else None
         _label = label[data_index] if label else None
+        print(_custom)
 
         figure.add_trace(go.Scatter(
             x=_x,
             y=_y,
             customdata=_custom,
-            name=_label
+            name=_label,
+            hovertemplate=hovertemplate,
+            line_shape = "spline" if props.spline else "linear"
         ))
 
     figure.update_layout(
         yaxis_title=axes_labels.get("y"),
         xaxis_title=axes_labels.get("x"),
-        title=props.title or ""
+        title=props.title or "",
+        **DEFAULT_LAYOUT
     )
 
     return figure.to_json()
