@@ -24,6 +24,7 @@ class ChartBot:
         transport = FastMCPTransport(plotly_mcp)
         self.mcp = Client(transport=transport)
         print(config.llm.connection_params)
+        print(config.llm.MODEL)
         self.llm = OpenAI(**config.llm.connection_params)
         self.model = config.llm.MODEL 
 

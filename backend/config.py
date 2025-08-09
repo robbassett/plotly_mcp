@@ -11,7 +11,7 @@ dotenv.load_dotenv()
 
 class LlmConfig(BaseSettings):
     """Configuration for LLM"""
-    BASE_URL: str = os.environ.get("OPENAI_API_KEY","https://openrouter.ai/api/v1")
+    BASE_URL: str = os.environ.get("OPENAI_API_BASE_URL","https://openrouter.ai/api/v1")
     TOKEN: str = os.environ.get("OPENAI_API_TOKEN","")
     MODEL: str = os.environ.get("OPENAI_MODEL","anthropic/claude-sonnet-4")
 

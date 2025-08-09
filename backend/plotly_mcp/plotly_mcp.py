@@ -35,23 +35,19 @@ def line_plot(props:LineChartInput) -> str:
     """
     figure = go.Figure()
     x,y = props.x,props.y
-    print(props)
-    print()
 
     custom = props.hover_values
     label = props.labels
     axes_labels = props.axes_labels or {}
     hovertemplate = ""
-    for i,hlabel in enumerate(props.hover_labels):
-        hovertemplate += str(hlabel) + ": %{customdata[" + str(i) + "]}<br>"
+    if props.hover_labels:
+        for i,hlabel in enumerate(props.hover_labels):
+            hovertemplate += str(hlabel) + ": %{customdata[" + str(i) + "]}<br>"
     hovertemplate += '<extra></extra>'
-
-    print(hovertemplate)
 
     for data_index,(_x,_y) in enumerate(zip(x,y)):
         _custom = custom[data_index] if custom else None
         _label = label[data_index] if label else None
-        print(_custom)
 
         figure.add_trace(go.Scatter(
             x=_x,
